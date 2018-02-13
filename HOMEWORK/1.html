@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+</head>
+<body>
+    <div id='content'></div>
+
+    <script type="text/babel">
+
+        var ARTICLES = [
+            {
+                id: 1,
+                title: 'ARTICLE 1',
+                author: 'Author 1',
+                body: '+250966666666'
+            }, {
+                id: 2,
+                title: 'ARTICLE 2',
+                author: 'Author 2',
+                body: '+250966344466'
+            }, {
+                id: 3,
+                title: 'ARTICLE 3',
+                author: 'Author 3',
+                body: '+250976654433'
+            }, {
+                id: 4,
+                title: 'ARTICLE 4',
+                author: 'Author 4',
+                body: '+250456784935'
+            }
+        ];
+
+
+
+        var Article = React.createClass ({
+            render: function() {
+                return (  
+                    <li>
+                        <h3>{this.props.title}</h3>
+                        <p>{this.props.author}</p>
+                        <p>{this.props.body}</p>
+                    </li>
+                );
+            }
+        });
+
+        var ArticlesList = React.createClass({
+            render: function() {
+                return (
+                    <ul>
+                    {
+                        ARTICLES.map(function(el) {
+                            return <Article 
+                                    key={el.id}
+                                    title={el.title}
+                                    author={el.author}
+                                    body={el.body} />;
+                        })
+                    }
+                    </ul>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <ArticlesList />,
+            document.getElementById("content")
+        );
+
+    </script>
+</body>
+</html>
