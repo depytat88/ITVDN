@@ -73,7 +73,7 @@
                             <div className="contact-number"> {this.props.phoneNumber} </div>
                         </div>
                         
-                        <p className={this.state.isOpened ? 'hidden' : ''}>
+                        <p className={'generator ' + (this.state.isOpened ? 'hidden' : '') + '' + (!this.state.isOpened ? 'zzzz' : '')}>
                             {this.props.email}
                         </p>
                     </li>
