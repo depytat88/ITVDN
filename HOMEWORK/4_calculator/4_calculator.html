@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div id='content'></div>
+
+    <script type="text/babel">
+
+        // var NUMBERS = [
+        //     {
+        //         id: 11,
+        //         operator: true,
+        //         val: "+"
+        //     }, {
+        //         id: 22,
+        //         operator: true,
+        //         val: "-"
+        //     }, {
+        //         id: 33,
+        //         operator: true,
+        //         val: "/"
+        //     }
+            // , {
+            //     id: 1,
+            //     val: 1
+            // }, {
+            //     id: 2,
+            //     val: 2
+            // }, {
+            //     id: 3,
+            //     val: 3
+            // }, {
+            //     id: 4,
+            //     val: 4
+            // }, {
+            //     id: 5,
+            //     val: 5
+            // }, {
+            //     id: 6,
+            //     val: 6
+            // }, {
+            //     id: 7,
+            //     val: 7
+            // }, {
+            //     id: 8,
+            //     val: 8
+            // }, {
+            //     id: 9,
+            //     val: 9
+            // }, {
+            //     id: 0,
+            //     val: 0
+            // }
+        // ];
+
+        // var CalculatorInputLeft = React.createClass({
+        //     getInitialState: function() {
+        //         return {
+        //             val: 0
+        //         };
+        //     },
+
+        //     render: function() {
+        //         return (
+        //             <input type="text" className="field" value={this.state.val} />
+        //         );
+        //     }
+        // });
+
+        // var CalculatorInputRight = React.createClass({
+        //     getInitialState: function() {
+        //         return {
+        //             val: 0
+        //         };
+        //     },
+
+        //     render: function() {
+        //         return (
+        //             <input type="text" className="field" value={this.state.val} />
+        //         );
+        //     }
+        // });
+
+        // var CalculatorInputs = React.createClass({
+        //     render: function() {
+        //         return (
+        //             <div className="fields">
+        //                 <CalculatorInputLeft />
+        //                 <CalculatorInputRight />
+        //             </div>
+        //         );
+        //     }
+        // });
+
+        // var CalculationsActions = React.createClass({
+            
+        // });
+
+        // var CalculatorNumber = React.createClass({
+        //     getInitialState: function() {
+        //         return {
+                    
+        //         };
+        //     },
+
+        //     btnFocusToggle: function(event) {
+        //         this.setState({
+        //             isFocused: !this.state.isFocused
+        //         })
+        //     },
+
+        //     mathAction: function(event) {  
+        //         var targetVal = event.target;
+
+        //         if (targetVal.dataset.function==='btn-operator') {
+        //             console.log(Calculator.totalCount);
+        //         }
+        //     },
+
+        //     render: function() {
+        //         return (
+        //             <li className="calculator-number">
+        //                 <button className={'btn ' + (this.state.isFocused ? 'focused' : '')} 
+        //                         data-function={(this.props.operator ? 'btn-operator' : 'btn-number')}
+        //                         onMouseDown={this.btnFocusToggle} 
+        //                         onMouseUp={this.btnFocusToggle} 
+        //                         // onClick={Calculator.totalCount}
+        //                         onClick={() => Calculator.totalCount()} >
+        //                     {this.props.val}
+        //                 </button>
+        //             </li>
+        //         );
+        //     }
+        // });
+
+        // var CalculatorNumbers = React.createClass({
+        //     render: function() {
+        //         return (
+        //             <ul className="calculator-numbers">
+        //                 {
+        //                     NUMBERS.map(function(el) {
+        //                         return <CalculatorNumber 
+        //                                 key={el.id}
+        //                                 val={el.val} 
+        //                                 operator={el.operator} />;
+        //                     })
+        //                 }
+        //             </ul>
+        //         );
+        //     }
+        // });
+
+        // var CalculatorDisplay = React.createClass({
+        //     render: function() {
+        //         return (
+                    
+        //         );
+        //     }
+        // });
+
+        var Calculator = React.createClass({
+            getInitialState: function() {
+                return {
+                    fieldValOne: 0,
+                    fieldValTwo: 0,
+                    pickedInput: 'first',
+                    firstVal: 0,
+                    secondVal: 0,
+                    operator: '?',
+                    total: null
+                };
+            },
+
+            pickedInput: function(event) {  
+                var turn = event.target.id.toLowerCase();
+
+                switch(turn) {
+                case 'first':
+                    this.setState({
+                        pickedInput: 'first',
+                    });
+                    break;
+                case 'second':
+                    this.setState({
+                        pickedInput: 'second',
+                    });
+                    break;
+                default:
+                    break;
+                }
+            },
+
+            totalPlus: function() {
+                this.setState({
+                    total: Number(this.state.firstVal) + Number(this.state.secondVal),
+                    operator: '+'
+                });
+            },
+
+            totalMinus: function() {
+                this.setState({
+                    total: this.state.firstVal - this.state.secondVal,
+                    operator: '-'
+                });
+            },
+
+            totalMultiplication: function() {
+                this.setState({
+                    total: this.state.firstVal * this.state.secondVal,
+                    operator: '*'
+                });
+            },
+
+            totalCount: function(event) {
+
+                switch(event.target.id) {
+                case 'first':
+                    this.setState({
+                        firstVal: event.target.value
+                    });
+                    this.totalMultiCount();
+                    break;
+                case 'second':
+                    this.setState({
+                        secondVal: event.target.value
+                    });
+                    this.totalMultiCount();
+                    break;
+                default:
+                    break;
+                }
+            },
+
+            totalMultiCount: function() {
+
+                switch(this.state.operator) {
+                case '+':
+                    this.totalPlus();
+                    break;
+                case '-':
+                    this.totalMinus();
+                    break;
+                case '*':
+                    this.totalMultiplication();
+                    break;
+                default:
+                    break;
+                }
+            },
+
+            render: function() {
+                return (
+                    <div className="calculator">
+                        <div className="calculator-display">
+                            <span>
+                                {this.state.firstVal}
+                            </span>
+                            <span> </span>
+                            <span>
+                                {this.state.operator}
+                            </span>
+                            <span> </span>
+                            <span>
+                                {this.state.secondVal}
+                            </span>
+                            <span> </span>
+                            =
+                            <span> </span>
+                            <span>
+                                {this.state.total}
+                            </span>
+                        </div>
+
+                        <div className="fields">
+                            <input type="text" 
+                                    id="first" 
+                                    className={'field ' + ((this.state.pickedInput==='first') ? 'field-focused' : '')} 
+                                    placeholder={this.state.fieldValOne} 
+                                    onFocus={this.pickedInput}
+                                    onChange={this.totalCount} />
+
+                            <input type="text" 
+                                    id="second" 
+                                    className={'field ' + ((this.state.pickedInput==='second') ? 'field-focused' : '')} 
+                                    placeholder={this.state.fieldValTwo} 
+                                    onFocus={this.pickedInput}
+                                    onChange={this.totalCount} />
+                        </div>
+
+                        <ul className="calculator-numbers">
+                            <li className="calculator-number">
+                                <button className={'btn ' + (this.state.isFocused ? 'focused' : '')} 
+                                        onClick={this.totalPlus} >
+                                    +
+                                </button>
+                            </li>
+                            <li className="calculator-number">
+                                <button className={'btn ' + (this.state.isFocused ? 'focused' : '')} 
+                                        onClick={this.totalMinus} >
+                                    -
+                                </button>
+                            </li>
+                            <li className="calculator-number">
+                                <button className={'btn ' + (this.state.isFocused ? 'focused' : '')} 
+                                        onClick={this.totalMultiplication} >
+                                    *
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <Calculator />,
+            document.getElementById("content")
+        );
+
+    </script>
+</body>
+</html>
