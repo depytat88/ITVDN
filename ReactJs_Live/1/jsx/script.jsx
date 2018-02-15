@@ -1,19 +1,33 @@
-// let heading = <h1>Hello World zzz!!!</h1>;
-let background = {backgroundColor: "green",border: "1px solid red"};
+const DigitalClock = function (props) {
+    return <div>{props.time}</div>
+}
 
+class Clock extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            curentTime: (new Date()).toLocaleString()
+        }
+        this.clockLauncher()
+    }
 
-class HelloWorld extends React.Component {
-    getUrl () {
-        return "https://ddddddd.com"
+    clockLauncher () {
+        setInterval(() => {
+            this.setState({
+                curentTime: (new Date()).toLocaleString()
+            })
+        }, 1000)
     }
 
     render () {
-        // return <h1 style={{background: "red"}}>Hello World dzdzdz {this.getUrl()}!!!</h1>;
-        return <h1 style={background}>Hello World dzdzdz {this.getUrl()}!!!</h1>;
+        return (
+            // <div>{this.state.curentTime}</div>
+            <DigitalClock time={this.state.curentTime} />
+        );
     }
 }
 
 ReactDOM.render(
-    <HelloWorld />, 
+    <Clock />, 
     document.getElementById('content')
 );
