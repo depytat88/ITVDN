@@ -1,0 +1,23 @@
+{
+  "name": "1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-version": "babel --version",
+    "build": "node_modules/.bin/babel jsx/script.jsx -o js/script.js -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-install": "2.1.0",
+    "babel-preset-react": "^6.5.0"
+  },
+  "babel": {
+    "presets": [
+      "react"
+    ]
+  }
+}
