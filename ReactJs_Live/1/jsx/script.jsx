@@ -1,59 +1,51 @@
-const DigitalClock = function (props) {
-    return <div>{props.time}</div>
-}
+//как я понял пожно не биндить всё равно работает
 
-class Clock extends React.Component {
+class Content extends React.Component {
     constructor (props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
         this.state = {
-            curentTime: (new Date()).toLocaleString()
+            counter: 0
         }
-        this.clockLauncher()
     }
 
-    clockLauncher () {
-        let diapazon = setInterval(() => {
-            console.log("time changing");
-            this.setState({
-                curentTime: (new Date()).toLocaleString()
-            })
-        }, 1000);
-        this.setState({diapazon: diapazon});
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.state.diapazon);
+    handleClick() {
+        this.setState ({
+            counter: ++this.state.counter
+        });
     }
 
     render () {
         return (
             <div>
-                <DigitalClock time={this.state.curentTime} />
-                <p>Clock will be removed in {this.props.seconds}</p>
+                <Button handler={this.handleClick} />
+                <Text   counter={this.state.counter} />    
+            </div>    
+        );
+    }
+}
+
+class Button extends React.Component {
+    render () {
+        return (
+            <button onClick={this.props.handler}>
+                Click me!!!
+            </button>
+        );
+    }
+}
+
+class Text extends React.Component {
+    render () {
+        return (
+            <div>
+                (Already clecked {this.props.counter} times!)
             </div>
         );
     }
 }
 
-
-
-let seconds = 5;
-let interval = setInterval (()=>{
-    if (seconds === 0) {
-        ReactDOM.render(
-            <div>
-                <p>
-                    Clock has been removed
-                </p>
-            </div>, 
-            document.getElementById('content')
-        );
-        clearInterval(interval);
-    } else {
-        ReactDOM.render(
-            <Clock seconds={seconds} />, 
-            document.getElementById('content')
-        );
-        seconds --;
-    }
-},1000);
+ReactDOM.render(
+    <Content />, 
+    document.getElementById('content')
+);

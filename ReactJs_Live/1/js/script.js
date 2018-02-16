@@ -1,64 +1,50 @@
-const DigitalClock = function (props) {
-    return React.createElement(
-        'div',
-        null,
-        props.time
-    );
-};
+//как я понял пожно не биндить всё равно работает
 
-class Clock extends React.Component {
+class Content extends React.Component {
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
         this.state = {
-            curentTime: new Date().toLocaleString()
+            counter: 0
         };
-        this.clockLauncher();
     }
 
-    clockLauncher() {
-        let diapazon = setInterval(() => {
-            console.log("time changing");
-            this.setState({
-                curentTime: new Date().toLocaleString()
-            });
-        }, 1000);
-        this.setState({ diapazon: diapazon });
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.state.diapazon);
+    handleClick() {
+        this.setState({
+            counter: ++this.state.counter
+        });
     }
 
     render() {
         return React.createElement(
             'div',
             null,
-            React.createElement(DigitalClock, { time: this.state.curentTime }),
-            React.createElement(
-                'p',
-                null,
-                'Clock will be removed in ',
-                this.props.seconds
-            )
+            React.createElement(Button, { handler: this.handleClick }),
+            React.createElement(Text, { counter: this.state.counter })
         );
     }
 }
 
-let seconds = 5;
-let interval = setInterval(() => {
-    if (seconds === 0) {
-        ReactDOM.render(React.createElement(
+class Button extends React.Component {
+    render() {
+        return React.createElement(
+            'button',
+            { onClick: this.props.handler },
+            'Click me!!!'
+        );
+    }
+}
+
+class Text extends React.Component {
+    render() {
+        return React.createElement(
             'div',
             null,
-            React.createElement(
-                'p',
-                null,
-                'Clock has been removed'
-            )
-        ), document.getElementById('content'));
-        clearInterval(interval);
-    } else {
-        ReactDOM.render(React.createElement(Clock, { seconds: seconds }), document.getElementById('content'));
-        seconds--;
+            '(Already clecked ',
+            this.props.counter,
+            ' times!)'
+        );
     }
-}, 1000);
+}
+
+ReactDOM.render(React.createElement(Content, null), document.getElementById('content'));
