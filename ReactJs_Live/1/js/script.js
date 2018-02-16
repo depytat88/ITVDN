@@ -16,19 +16,49 @@ class Clock extends React.Component {
     }
 
     clockLauncher() {
-        setInterval(() => {
+        let diapazon = setInterval(() => {
+            console.log("time changing");
             this.setState({
                 curentTime: new Date().toLocaleString()
             });
         }, 1000);
+        this.setState({ diapazon: diapazon });
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.diapazon);
     }
 
     render() {
-        return (
-            // <div>{this.state.curentTime}</div>
-            React.createElement(DigitalClock, { time: this.state.curentTime })
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(DigitalClock, { time: this.state.curentTime }),
+            React.createElement(
+                'p',
+                null,
+                'Clock will be removed in ',
+                this.props.seconds
+            )
         );
     }
 }
 
-ReactDOM.render(React.createElement(Clock, null), document.getElementById('content'));
+let seconds = 5;
+let interval = setInterval(() => {
+    if (seconds === 0) {
+        ReactDOM.render(React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'p',
+                null,
+                'Clock has been removed'
+            )
+        ), document.getElementById('content'));
+        clearInterval(interval);
+    } else {
+        ReactDOM.render(React.createElement(Clock, { seconds: seconds }), document.getElementById('content'));
+        seconds--;
+    }
+}, 1000);
