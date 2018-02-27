@@ -1,22 +1,22 @@
 class Content extends React.Component {
     constructor(props) {
         super(props);
-        this.handleText = this.handleText.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.state = {
-            text: "type here"
+            selectValue: "angular"
         };
         this.helper();
     }
 
     helper() {
         setInterval(() => {
-            console.log(this.state.text);
+            console.log(this.state.selectValue);
         }, 1000);
     }
 
-    handleText(event) {
+    handleSelect(event) {
         this.setState({
-            text: event.target.value
+            selectValue: event.target.value
         });
     }
 
@@ -24,7 +24,27 @@ class Content extends React.Component {
         return React.createElement(
             "form",
             null,
-            React.createElement("textarea", { value: this.state.tetx, onChange: this.handleText })
+            React.createElement(
+                "select",
+                {
+                    value: this.state.selectValue,
+                    onChange: this.handleSelect },
+                React.createElement(
+                    "option",
+                    { value: "angular" },
+                    "Angular"
+                ),
+                React.createElement(
+                    "option",
+                    { value: "react" },
+                    "React"
+                ),
+                React.createElement(
+                    "option",
+                    { value: "ember" },
+                    "Ember"
+                )
+            )
         );
     }
 }

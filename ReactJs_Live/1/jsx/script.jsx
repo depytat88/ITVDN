@@ -1,29 +1,35 @@
 class Content extends React.Component {
     constructor (props) {
         super(props);
-        this.handleText = this.handleText.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.state = {
-            text: "type here"
+            selectValue: "angular"
         };
         this.helper();
     }
 
     helper() {
         setInterval(()=>{
-            console.log(this.state.text);
+            console.log(this.state.selectValue);
         }, 1000);
     }
 
-    handleText(event) {
+    handleSelect(event) {
         this.setState({
-            text: event.target.value
+            selectValue: event.target.value
         });
     }
 
     render () {
         return (
             <form>
-                <textarea value={this.state.tetx} onChange={this.handleText}></textarea>
+                <select 
+                    value={this.state.selectValue}
+                    onChange={this.handleSelect}>
+                    <option value="angular">Angular</option>
+                    <option value="react">React</option>
+                    <option value="ember">Ember</option>
+                </select>
             </form>
         );
     }
