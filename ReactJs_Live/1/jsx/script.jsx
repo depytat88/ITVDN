@@ -1,20 +1,37 @@
-class Button extends React.Component {
+class Menu extends React.Component {
     render () {
+        let menus = [
+            "Home",
+            "Service",
+            "Delivery",
+            "Contacts",
+            "Our Partners"
+        ];
+
         return (
-            <button>{this.props.buttonLabel}</button>
+            <div>
+                {menus.map(
+                    (value, index)=> {
+                        return <div key={index}><Link label={value} /></div>
+                    }
+                )}
+            </div>
         );
     }
 }
 
-Button.defaultProps = {
-    buttonLabel: "Submit"
+class Link extends React.Component {
+    render () {
+        const url = "/" + this.props.label.toLowerCase().trim().replace(" ", "-");
+        return (
+            <div>
+                <a href={url}>{this.props.label}</a>
+            </div>
+        );
+    }
 }
 
 ReactDOM.render(
-    <div>
-        <Button  buttonLabel="ZZZ" />
-        <Button  />
-        <Button  />
-    </div>, 
+    <Menu />, 
     document.getElementById('content')
 );
