@@ -1,29 +1,45 @@
 class Content extends React.Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleRadio = this.handleRadio.bind(this);
         this.state = {
-            counter: 0
+            radioGroup: {
+                Angular: false,
+                ReactJs: true,
+                Ember: false
+            }
+
         };
     }
 
-    handleClick() {
+    handleRadio() {
         this.setState({
             counter: ++this.state.counter
         });
     }
 
     render() {
-        return React.createElement(Button, { handler: this.handleClick, text: `Click me! (Already clicked ` + this.state.counter + ` times` });
-    }
-}
-
-class Button extends React.Component {
-    render() {
         return React.createElement(
-            'button',
-            { onClick: this.props.handler },
-            this.props.text
+            "form",
+            null,
+            React.createElement("input", {
+                type: "radio",
+                value: "angular",
+                chacked: this.state.radioGroup.Angular,
+                onChange: this.handleRadio
+            }),
+            React.createElement("input", {
+                type: "radio",
+                value: "react",
+                chacked: this.state.radioGroup.ReactJs,
+                onChange: this.handleRadio
+            }),
+            React.createElement("input", {
+                type: "radio",
+                value: "ember",
+                chacked: this.state.radioGroup.Ember,
+                onChange: this.handleRadio
+            })
         );
     }
 }
