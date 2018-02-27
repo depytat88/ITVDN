@@ -1,46 +1,29 @@
 class Content extends React.Component {
     constructor (props) {
         super(props);
-        this.handleCheckbox = this.handleCheckbox.bind(this);
+        this.handleText = this.handleText.bind(this);
         this.state = {
-            checkboxGroup: {
-                Angular: false,
-                ReactJs: true,
-                Ember: false
-            }
-        }
+            text: "type here"
+        };
+        this.helper();
     }
 
-    handleCheckbox(event) {
-        let object = Object.assign(this.state.checkboxGroup);
-        object[event.target.value] = event.target.checked;
+    helper() {
+        setInterval(()=>{
+            console.log(this.state.text);
+        }, 1000);
+    }
+
+    handleText(event) {
         this.setState({
-            checkboxGroup: object
+            text: event.target.value
         });
-        console.log(this.state.checkboxGroup);
     }
 
     render () {
         return (
             <form>
-                <input 
-                    type="checkbox"
-                    value="Angular"
-                    checked={this.state.checkboxGroup.Angular}
-                    onChange={this.handleCheckbox}
-                />
-                <input 
-                    type="checkbox"
-                    value="ReactJs"
-                    checked={this.state.checkboxGroup.ReactJs}
-                    onChange={this.handleCheckbox}
-                />
-                <input 
-                    type="checkbox"
-                    value="Ember"
-                    checked={this.state.checkboxGroup.Ember}
-                    onChange={this.handleCheckbox}
-                />
+                <textarea value={this.state.tetx} onChange={this.handleText}></textarea>
             </form>
         );
     }
