@@ -1,52 +1,21 @@
-class Content extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleSelect = this.handleSelect.bind(this);
-        this.state = {
-            selectValue: "angular"
-        };
-        this.helper();
-    }
-
-    helper() {
-        setInterval(() => {
-            console.log(this.state.selectValue);
-        }, 1000);
-    }
-
-    handleSelect(event) {
-        this.setState({
-            selectValue: event.target.value
-        });
-    }
-
+class Button extends React.Component {
     render() {
         return React.createElement(
-            "form",
+            "button",
             null,
-            React.createElement(
-                "select",
-                {
-                    value: this.state.selectValue,
-                    onChange: this.handleSelect },
-                React.createElement(
-                    "option",
-                    { value: "angular" },
-                    "Angular"
-                ),
-                React.createElement(
-                    "option",
-                    { value: "react" },
-                    "React"
-                ),
-                React.createElement(
-                    "option",
-                    { value: "ember" },
-                    "Ember"
-                )
-            )
+            this.props.buttonLabel
         );
     }
 }
 
-ReactDOM.render(React.createElement(Content, null), document.getElementById('content'));
+Button.defaultProps = {
+    buttonLabel: "Submit"
+};
+
+ReactDOM.render(React.createElement(
+    "div",
+    null,
+    React.createElement(Button, { buttonLabel: "ZZZ" }),
+    React.createElement(Button, null),
+    React.createElement(Button, null)
+), document.getElementById('content'));
