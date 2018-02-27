@@ -1,5 +1,3 @@
-//как я понял пожно не биндить всё равно работает
-
 class Content extends React.Component {
     constructor(props) {
         super(props);
@@ -16,12 +14,7 @@ class Content extends React.Component {
     }
 
     render() {
-        return React.createElement(
-            'div',
-            null,
-            React.createElement(Button, { handler: this.handleClick }),
-            React.createElement(Text, { counter: this.state.counter })
-        );
+        return React.createElement(Button, { handler: this.handleClick, text: `Click me! (Already clicked ` + this.state.counter + ` times` });
     }
 }
 
@@ -30,19 +23,7 @@ class Button extends React.Component {
         return React.createElement(
             'button',
             { onClick: this.props.handler },
-            'Click me!!!'
-        );
-    }
-}
-
-class Text extends React.Component {
-    render() {
-        return React.createElement(
-            'div',
-            null,
-            '(Already clecked ',
-            this.props.counter,
-            ' times!)'
+            this.props.text
         );
     }
 }
