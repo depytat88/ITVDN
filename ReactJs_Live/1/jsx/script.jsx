@@ -1,43 +1,45 @@
 class Content extends React.Component {
     constructor (props) {
         super(props);
-        this.handleRadio = this.handleRadio.bind(this);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
         this.state = {
-            radioGroup: {
+            checkboxGroup: {
                 Angular: false,
                 ReactJs: true,
                 Ember: false
             }
-            
         }
     }
 
-    handleRadio() {
+    handleCheckbox(event) {
+        let object = Object.assign(this.state.checkboxGroup);
+        object[event.target.value] = event.target.checked;
         this.setState({
-            counter: ++this.state.counter
+            checkboxGroup: object
         });
+        console.log(this.state.checkboxGroup);
     }
 
     render () {
         return (
             <form>
                 <input 
-                    type="radio"
-                    value="angular"
-                    chacked={this.state.radioGroup.Angular}
-                    onChange={this.handleRadio}
+                    type="checkbox"
+                    value="Angular"
+                    checked={this.state.checkboxGroup.Angular}
+                    onChange={this.handleCheckbox}
                 />
                 <input 
-                    type="radio"
-                    value="react"
-                    chacked={this.state.radioGroup.ReactJs}
-                    onChange={this.handleRadio}
+                    type="checkbox"
+                    value="ReactJs"
+                    checked={this.state.checkboxGroup.ReactJs}
+                    onChange={this.handleCheckbox}
                 />
                 <input 
-                    type="radio"
-                    value="ember"
-                    chacked={this.state.radioGroup.Ember}
-                    onChange={this.handleRadio}
+                    type="checkbox"
+                    value="Ember"
+                    checked={this.state.checkboxGroup.Ember}
+                    onChange={this.handleCheckbox}
                 />
             </form>
         );
