@@ -1,4 +1,9 @@
-class TimerWrapper extends React.Component {
+const React = require('react')
+const ReactDOM = require('react-dom')
+
+
+
+class Content extends React.Component {
     constructor (props) {
         super (props);
         this.startTimer = this.startTimer.bind(this);
@@ -74,7 +79,4 @@ class TimerDisplay extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <TimerWrapper />, 
-    document.getElementById('content')
-);
+module.exports = Content
