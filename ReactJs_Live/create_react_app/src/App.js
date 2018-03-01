@@ -1,44 +1,55 @@
 import React from 'react';
-import { BrouserRouter, Route, Link } from 'react-router-dom';
-import createBrouserHistory from 'history/createBrowserHistory';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 
 const history = createBrowserHistory();
 
-const Home = () => {
+const Home = () => (
   <div>
     <h2>Home</h2>
   </div>
-}
+)
+  
 
 
-const About = () => {
+const About = () => (
   <div>
     <h2>About</h2>
   </div>
-}
+)
 
-const Contacts = () => {
+const Contacts = () => (
   <div>
     <h2>Contacts</h2>
   </div>
-}
+)
 
 
 
 class Navigation extends React.Component {
   render () {
     return (
-      <BrouserRouter history={history}>
-        <ul>
-          <li><link to="/">Home</link></li>
-          <li><link to="/about">About</link></li>
-          <li><link to="/contacts">Contacts</link></li>
-        </ul>
-      </BrouserRouter>
+      <BrowserRouter history={history}>
+        <div>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contacts">Contacts</Link></li>
+          </ul>
+
+          <hr />
+
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/contacts" component={Contacts} />
+        </div>
+      </BrowserRouter>
     );
   }
 }
+
+export default Navigation;
 
 
 
